@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Achei · A IA de Xinguara no WhatsApp</title>
+<meta name="description" content="Achei: a inteligência artificial no WhatsApp que encontra os comércios de Xinguara. Preço, cardápio, horário e contato numa mensagem.">
+<meta name="theme-color" content="#0C0B08">
+<link rel="icon" type="image/png" sizes="32x32" href="img/achei-fav32.png">
+<link rel="apple-touch-icon" href="img/achei-touch.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/f-burger.webp">
+<style>
+:root{
+  --bg:#0C0B08; --bg2:#15130E; --bg3:#1E1B14; --linha:#2B271D;
+  --am:#FFD400; --am2:#F2A500; --creme:#F4F0E4; --txt:#CFCABB; --sec:#8F8977;
+  --ease:cubic-bezier(.2,.7,.2,1); --spring:cubic-bezier(.34,1.56,.64,1);
+  --gut:clamp(22px,4vw,48px); --sh:clamp(600px,100svh,1000px);
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-bar:#202C33; --wa-txt:#E9EDEF; --wa-sub:#8696A0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block}
+h1,h2,h3{font-family:Unbounded,Inter,sans-serif;color:var(--creme);font-weight:700;letter-spacing:-.035em;line-height:1.02}
+.wrap{width:100%;max-width:1280px;margin:0 auto;padding:0 var(--gut)}
+.am{color:var(--am)}
+
+/* ===== intro ===== */
+.intro{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;place-items:center;clip-path:inset(0 0 0 0);transition:clip-path 1s var(--ease)}
+.intro img{width:150px;height:auto;opacity:0;transform:scale(.6) translateY(20px);animation:simb 1.1s var(--spring) .15s forwards}
+.intro span{position:absolute;bottom:calc(50% - 110px);font-family:Unbounded;font-weight:700;color:var(--creme);letter-spacing:.18em;font-size:20px;opacity:0;animation:pal .7s var(--ease) .7s forwards}
+@keyframes simb{to{opacity:1;transform:none}}
+@keyframes pal{to{opacity:1;letter-spacing:.32em}}
+.pronto .intro{clip-path:inset(0 0 100% 0)}
+.pronto .intro img,.pronto .intro span{transition:opacity .4s;opacity:0}
+
+/* ===== cabeçalho ===== */
+header{position:fixed;top:0;left:0;right:0;z-index:60;padding:16px var(--gut) 0;transition:padding .6s var(--ease)}
+.nav{max-width:1280px;margin:0 auto;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 18px;border-radius:999px;border:1px solid transparent;transition:all .6s var(--ease)}
+header.sol{padding-top:10px}
+header.sol .nav{max-width:1080px;height:60px;background:rgba(21,19,14,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-color:var(--linha);box-shadow:0 18px 40px -20px rgba(0,0,0,.8)}
+.marca{display:flex;align-items:center;gap:10px;height:100%}
+.marca img{height:30px;width:auto}
+.marca b{font-family:Unbounded;font-weight:700;font-size:21px;color:var(--creme);letter-spacing:.04em;line-height:1}
+.links{display:flex;gap:34px;font-size:15px;font-weight:500;color:var(--sec)}
+.links a{position:relative;transition:color .25s}
+.links a:after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--am);transform:scaleX(0);transition:transform .35s var(--ease)}
+.links a:hover{color:var(--creme)}.links a:hover:after{transform:scaleX(1)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 24px;border-radius:999px;font-weight:600;font-size:15px;line-height:1;white-space:nowrap;position:relative;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s,background .3s,color .3s,border-color .3s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn svg{flex:none}
+.btn-am{background:var(--am);color:#17140A;box-shadow:0 12px 30px -12px rgba(255,212,0,.6)}
+.btn-am:hover{background:#FFE14D;box-shadow:0 16px 36px -10px rgba(255,212,0,.8)}
+.btn-am:after{content:"";position:absolute;top:0;bottom:0;left:-50%;width:35%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);animation:brilho 5s 3s infinite}
+@keyframes brilho{0%,72%{left:-50%}100%{left:130%}}
+.btn-esc{background:var(--bg);color:var(--creme)}
+.btn-esc:hover{background:#000}
+.btn-lin{border:1px solid #3B3628;color:var(--creme)}
+.btn-lin:hover{border-color:var(--am);color:var(--am)}
+.nav .btn{height:46px}
+@media(max-width:900px){.links{display:none}.nav{padding:0 6px 0 14px}.nav .btn{height:42px;padding:0 18px;font-size:14px}.marca img{height:26px}.marca b{font-size:18px}}
+
+/* ===== herói ===== */
+.hero{position:relative;height:100svh;min-height:560px;display:flex;align-items:center;overflow:hidden;padding:96px 0 100px}
+.hero .luz{position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(255,212,0,.10) 62%,transparent 80%),linear-gradient(180deg,transparent 60%,rgba(242,165,0,.06));pointer-events:none}
+.hero .wrap{position:relative;height:100%;display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center}
+.hero h1{font-size:clamp(40px,min(5.2vw,9.4svh),84px)}
+.ln{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.ln>span{display:block;transform:translateY(110%);transition:transform 1.1s var(--ease)}
+.pronto .ln>span{transform:none}
+.pronto .ln:nth-child(2)>span{transition-delay:.12s}
+.pronto .ln:nth-child(3)>span{transition-delay:.24s}
+.marcador{position:relative;display:inline-block;color:#17140A;padding:0 .14em;margin-left:-.06em}
+.marcador:before{content:"";position:absolute;inset:.1em 0 .02em;background:var(--am);border-radius:.14em;transform:scaleX(0);transform-origin:left;transition:transform .8s var(--ease) .9s;z-index:-1}
+.pronto .marcador:before{transform:scaleX(1)}
+.marcador{z-index:0}
+.hero p.lead{font-size:clamp(17px,1.35vw,20px);max-width:480px;margin:28px 0 36px;color:var(--txt)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.sob{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.pronto .sob{opacity:1;transform:none}
+.pronto .s1{transition-delay:.5s}.pronto .s2{transition-delay:.65s}.pronto .s3{transition-delay:.8s}
+.prova{display:flex;align-items:center;gap:14px;margin-top:38px;font-size:14px;color:var(--sec)}
+.prova .ics{display:flex}
+.prova .ics img{width:38px;height:38px;border-radius:12px;object-fit:cover;border:2px solid var(--bg);margin-left:-10px}
+.prova .ics img:first-child{margin-left:0}
+.prova b{color:var(--creme);font-weight:600}
+
+/* palco */
+.palco{position:relative;height:100%;max-height:760px}
+.fone{position:absolute;left:50%;top:50%;width:300px;height:633px;margin:-316px 0 0 -150px;transform:scale(var(--k,1)) translateY(60px);opacity:0;transition:opacity 1s var(--ease) .3s,transform 1.3s var(--spring) .3s;z-index:3}
+.pronto .fone{opacity:1;transform:scale(var(--k,1))}
+.casco{position:absolute;inset:0;border-radius:48px;background:linear-gradient(145deg,#3A3730,#16140F 40%,#26231C);padding:10px;box-shadow:inset 0 0 0 1.5px #4A463B,0 50px 90px -30px rgba(0,0,0,.95),0 30px 60px -40px rgba(255,212,0,.25)}
+.casco:before{content:"";position:absolute;right:-3px;top:22%;width:3px;height:64px;border-radius:2px;background:#2C2922}
+.tela{position:relative;height:100%;border-radius:39px;overflow:hidden;background:var(--wa-bg);display:flex;flex-direction:column}
+.ilha{position:absolute;top:9px;left:50%;width:86px;height:24px;border-radius:14px;background:#000;transform:translateX(-50%);z-index:5}
+.st{height:40px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 40px 4px;font-size:12px;font-weight:600;color:#fff}
+.st i{font-style:normal;display:flex;gap:5px;align-items:center}
+.wbar{display:flex;align-items:center;gap:9px;padding:8px 12px 10px;background:var(--wa-bar)}
+.wbar .vol{color:#00A884;font-size:20px;line-height:1;margin:0 0 0 4px}
+.wbar{padding-left:16px}
+.wbar .av{width:34px;height:34px;border-radius:50%;background:#0C0B08;display:grid;place-items:center;overflow:hidden}
+.wbar .av img{width:78%;height:auto}
+.wbar b{display:block;color:var(--wa-txt);font-size:14.5px;font-weight:600;line-height:1.2}
+.wbar small{color:var(--wa-sub);font-size:11.5px}
+.wbar .vf{margin-left:auto;display:flex;gap:16px}
+.wa{flex:1;overflow:hidden;position:relative;padding:10px 14px 6px;display:flex;flex-direction:column;justify-content:flex-end;gap:5px;background-color:var(--wa-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.035' stroke-width='1.2'%3E%3Cpath d='M10 14h12v9H10zM48 8c5 0 8 3 8 7s-3 7-8 7-8-3-8-7 3-7 8-7zM62 46l8 8-8 8-8-8zM14 50c4-4 10-4 14 0M30 66h10M36 30l6 4-6 4'/%3E%3C/g%3E%3C/svg%3E")}
+.dia{align-self:center;background:#182229;color:var(--wa-sub);font-size:11px;padding:4px 9px;border-radius:7px;margin-bottom:4px}
+.b{position:relative;max-width:84%;padding:8px 14px 8px 14px;border-radius:8px;font-size:13px;line-height:1.36;color:var(--wa-txt);opacity:0;transform:translateY(8px);transition:opacity .35s var(--ease),transform .45s var(--spring)}
+.b.v{opacity:1;transform:none}
+.b.out{align-self:flex-end;background:var(--wa-out);border-top-right-radius:0}
+.b.in{align-self:flex-start;background:var(--wa-in);border-top-left-radius:0}
+.b .h{float:right;margin:6px 0 -4px 10px;font-size:11px;color:rgba(233,237,239,.6);display:flex;gap:3px;align-items:center}
+.b.out .h svg{fill:#53BDEB}
+.b.foto{padding:4px 4px 8px;width:80%}
+.b.foto img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:6px}
+.b.foto p{padding:6px 10px 0}
+.b.foto .h{margin-right:4px}
+.b .pr{color:#FFD400;font-weight:600}
+.dig{align-self:flex-start;background:var(--wa-in);border-radius:8px;border-top-left-radius:0;padding:9px 11px;display:none;gap:4px}
+.dig.v{display:flex}
+.dig span{width:6px;height:6px;border-radius:3px;background:var(--wa-sub);animation:pula 1s infinite}
+.dig span:nth-child(2){animation-delay:.15s}.dig span:nth-child(3){animation-delay:.3s}
+@keyframes pula{50%{transform:translateY(-3px);opacity:.4}}
+.wcomp{display:flex;align-items:center;gap:7px;padding:7px 8px 16px;background:var(--wa-bg)}
+.wcomp div{flex:1;height:36px;border-radius:18px;background:var(--wa-bar);color:var(--wa-sub);font-size:13px;display:flex;align-items:center;padding:0 18px}
+.wcomp span{width:36px;height:36px;border-radius:50%;background:#00A884;display:grid;place-items:center}
+
+/* produtos saindo: presos ao celular, só por cima da moldura (nunca da tela com texto) */
+.pd{position:absolute;z-index:4;opacity:0;transition:opacity .9s var(--ease),transform 1.2s var(--spring)}
+.pronto .pd{opacity:1}
+.pd img{width:100%;height:auto}
+.pd .fl{animation:flut 6.5s ease-in-out infinite}
+@keyframes flut{50%{transform:translateY(-9px)}}
+.pd1{width:190px;right:292px;top:70px;transform:translate(40px,20px) rotate(-6deg);transition-delay:1s}
+.pronto .pd1{transform:rotate(-6deg)}
+.pd2{width:140px;left:294px;top:-40px;transform:translate(-40px,20px) rotate(7deg);transition-delay:1.15s}
+.pronto .pd2{transform:rotate(7deg)}
+.pd2 .fl{animation-delay:-2s}
+.pd3{width:190px;left:294px;top:420px;transform:translate(-40px,-20px) rotate(4deg);transition-delay:1.3s}
+.pronto .pd3{transform:rotate(4deg)}
+.pd3 .fl{animation-delay:-4s}
+.chip{position:absolute;z-index:5;display:flex;align-items:center;gap:10px;background:rgba(30,27,20,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid #3A3528;border-radius:16px;padding:10px 16px 10px 10px;font-size:13px;color:var(--creme);box-shadow:0 20px 40px -20px rgba(0,0,0,.9);opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease) 1.6s,transform .8s var(--spring) 1.6s;white-space:nowrap}
+.pronto .chip{opacity:1;transform:none}
+.chip .q{width:30px;height:30px;border-radius:9px;background:var(--am);display:grid;place-items:center;flex:none}
+.chip small{display:block;color:var(--sec);font-size:11.5px;line-height:1.2}
+.chip b{font-weight:600;line-height:1.3}
+.ch1{right:308px;top:470px}
+@media(max-width:1023px){.pd1{width:120px}.pd2{width:96px;top:16px}.pd3{width:124px;top:470px}.ch1{display:none}}
+@media(max-width:400px){.pd2{top:250px}}
+
+@media(max-width:1023px){
+  .hero{padding:92px 0 104px;min-height:0}
+  .hero .wrap{display:flex;flex-direction:column;align-items:stretch;gap:0}
+  .hero .wrap>div:first-child{display:contents}
+  .hero h1{order:1;font-size:clamp(34px,min(8.6vw,6.4svh),60px);text-align:center}
+  .palco{order:2;flex:1;min-height:0;height:auto;max-height:none;margin:8px 0}
+  .hero .cta{order:3;justify-content:center}
+  .hero p.lead,.prova{display:none}
+}
+@media(max-width:560px){
+  .hero .cta .btn{flex:1;padding:0 14px}
+  .hero .cta .btn-lin{display:none}
+}
+
+/* ===== faixa ===== */
+.faixa-w{overflow:hidden;padding:26px 0}
+.faixa{position:relative;z-index:2;background:var(--am);color:#17140A;padding:18px 0;overflow:hidden;transform:rotate(-1.6deg);margin:0 -40px;box-shadow:0 24px 50px -24px rgba(255,212,0,.45)}
+.trilho{display:flex;width:max-content;animation:anda 36s linear infinite;font-family:Unbounded;font-weight:700;font-size:clamp(18px,2vw,28px);letter-spacing:-.02em}
+.trilho span{display:flex;align-items:center;gap:36px;padding-right:36px;white-space:nowrap}
+.trilho span:after{content:"";width:13px;height:13px;background:#17140A;border-radius:3px;transform:rotate(45deg)}
+@keyframes anda{to{transform:translateX(-50%)}}
+
+/* ===== seções ===== */
+.scr{position:relative;padding:84px 0 64px}
+@media(min-width:1024px){.scr{height:var(--sh);padding:calc(var(--sh)*.1) 0 calc(var(--sh)*.06);display:flex;flex-direction:column;justify-content:center}}
+.sobre{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--am);margin-bottom:18px;display:block}
+.tit h2{font-size:clamp(30px,min(4vw,calc(var(--sh)*.066)),58px)}
+.tit p{margin-top:16px;font-size:clamp(16px,1.25vw,18px);color:var(--sec);max-width:500px}
+.rv{opacity:0;transform:translateY(40px);transition:opacity .9s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* categorias: cards deitados, objeto saindo por cima */
+.cats .topo{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:calc(var(--sh)*.09)}
+.trilha{display:grid;grid-template-columns:repeat(3,1fr);column-gap:18px;row-gap:calc(var(--sh)*.075)}
+.cat{position:relative;height:calc(var(--sh)*.2);min-height:150px;border-radius:26px}
+.cat:before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--c,#1E1B14);border:1px solid rgba(255,255,255,.05);transition:transform .5s var(--ease)}
+.cat:hover:before{transform:scale(1.02)}
+.cat .tx{position:absolute;left:22px;top:50%;transform:translateY(-50%);width:calc(54% - 44px);z-index:2}
+.cat .tx small{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,240,228,.55);margin-bottom:6px}
+.cat .tx b{display:block;font-family:Unbounded;font-weight:700;color:var(--creme);font-size:clamp(15px,1.25vw,19px);letter-spacing:-.02em;line-height:1.1}
+.cat .tx span{display:block;color:rgba(244,240,228,.6);font-size:14px;margin-top:6px}
+.cat .ob{position:absolute;right:14px;bottom:9%;width:43%;z-index:1}
+.cat .ob .fl{animation:flut 7s ease-in-out infinite}
+.cat:nth-child(2n) .ob .fl{animation-delay:-3s}
+.cat .ob img{width:100%;height:auto;transition:transform .6s var(--ease)}
+.cat:hover .ob img{transform:translateY(-8px)}
+@media(max-width:1023px){
+  .cats .topo{flex-direction:column;align-items:flex-start;margin-bottom:20px}
+  .trilha{display:flex;gap:16px;overflow-x:auto;padding:70px var(--gut) 12px;margin:0 calc(var(--gut)*-1);scrollbar-width:none}
+  .trilha::-webkit-scrollbar{display:none}
+  .cat{flex:none;width:290px;height:170px}
+}
+
+/* como funciona */
+.como .wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,6vw,90px);align-items:center}
+.passos{margin-top:36px;display:grid;gap:10px}
+.passo{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:20px 22px;border-radius:22px;border:1px solid var(--linha);background:transparent;cursor:pointer;text-align:left;color:inherit;font:inherit;transition:background .4s,border-color .4s}
+.passo .n{font-family:Unbounded;font-weight:700;font-size:15px;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--bg3);color:var(--sec);transition:background .4s,color .4s}
+.passo h3{font-size:19px;letter-spacing:-.02em}
+.passo p{color:var(--sec);font-size:15px;margin-top:4px}
+.passo .bar{grid-column:1/-1;height:3px;border-radius:2px;background:var(--linha);overflow:hidden;display:none}
+.passo .bar i{display:block;height:100%;width:0;background:var(--am)}
+.passo.at{background:var(--bg2);border-color:#3B3628}
+.passo.at .n{background:var(--am);color:#17140A}
+.passo.at .bar{display:block}
+.passo.at .bar i{animation:enche 5s linear forwards}
+@keyframes enche{to{width:100%}}
+.vitrine{position:relative;height:calc(var(--sh)*.72);min-height:430px;border-radius:36px;background:linear-gradient(160deg,#1C1A13,#100F0B);border:1px solid var(--linha);overflow:hidden}
+.vitrine .bg{position:absolute;inset:0;background:url(img/f-pizza.webp) center/cover;opacity:.16;filter:saturate(.6);transition:opacity .6s}
+.vitrine .fone{opacity:1;transform:scale(var(--k,1));transition:none}
+.cena{position:absolute;inset:0;opacity:0;transition:opacity .5s}
+.cena.at{opacity:1}
+@media(max-width:1023px){.como .wrap{grid-template-columns:1fr}.vitrine{height:560px}}
+
+/* para comércios */
+.com .painel{position:relative;border-radius:40px;background:var(--am);color:#17140A;display:grid;grid-template-columns:1fr 1.1fr;align-items:center;min-height:calc(var(--sh)*.66);margin-top:calc(var(--sh)*.08)}
+.com .painel .fx{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none}
+.com .painel .fx:before{content:"";position:absolute;right:-6%;top:-20%;width:58%;height:140%;background:url(img/achei-simbolo.webp) center/contain no-repeat;opacity:.09;filter:brightness(0)}
+.pessoa{position:relative;align-self:end;height:100%;min-height:inherit}
+.pessoa{container-type:size}
+.pessoa img{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:min(116cqh,calc(96cqw * 1329 / 900));width:auto;max-width:none}
+.com .txt{position:relative;padding:calc(var(--sh)*.05) clamp(28px,4vw,60px) calc(var(--sh)*.05) 0}
+.com h2{color:#17140A;font-size:clamp(28px,min(3.4vw,calc(var(--sh)*.058)),50px)}
+.com .sobre{color:#5C4700}
+.com .txt>p{margin:14px 0 24px;color:#4A3B05;font-size:clamp(15px,1.2vw,17px);max-width:470px}
+.planos{display:grid;gap:10px;margin-bottom:26px}
+.plano{display:flex;align-items:center;gap:14px;background:rgba(23,20,10,.07);border-radius:18px;padding:15px 18px;transition:background .3s,transform .35s var(--ease)}
+.plano:hover{background:rgba(23,20,10,.12);transform:translateX(5px)}
+.plano .ic{flex:none;width:38px;height:38px;border-radius:11px;background:#17140A;display:grid;place-items:center}
+.plano b{font-family:Unbounded;font-weight:700;font-size:16px;letter-spacing:-.02em;display:block}
+.plano span{font-size:14px;color:#4A3B05;line-height:1.35;display:block}
+.plano.top{background:#17140A;color:var(--creme)}
+.plano.top span{color:#B9B29E}
+.plano.top .ic{background:var(--am)}
+@media(max-width:1023px){
+  .com .painel{grid-template-columns:1fr;margin-top:40px}
+  .com .txt{padding:36px 22px 10px;order:-1}
+  .pessoa{height:440px;min-height:0;margin-top:60px}
+}
+@media(max-width:560px){.pessoa{height:360px}}
+@media(max-height:500px) and (max-width:1023px){.pessoa{height:250px}}
+@media(max-width:380px){.btn{white-space:normal;text-align:center;height:auto;min-height:48px;padding:12px 18px;line-height:1.2}.com .painel,.fim .caixa{grid-template-columns:minmax(0,1fr)}.dados{padding:8px 20px}.dados div{padding:14px 0}.fim .caixa{padding:26px 14px}.pessoa{height:280px}.com .txt{padding:30px 22px 6px}.com h2{font-size:25px}.fim h2{font-size:27px}}
+@media(min-width:1024px) and (max-height:780px){.com .txt>p{display:none}.planos{gap:8px}.plano{padding:11px 18px}}
+.fim .caixa>*{min-width:0}
+
+/* dúvidas como conversa */
+.duv .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,6vw,90px);align-items:center}
+.conv{background:var(--wa-bg);border:1px solid #1D2A31;border-radius:30px;padding:22px clamp(14px,2vw,26px);display:grid;gap:8px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.03' stroke-width='1.2'%3E%3Cpath d='M10 14h12v9H10zM48 8c5 0 8 3 8 7s-3 7-8 7-8-3-8-7 3-7 8-7zM62 46l8 8-8 8-8-8zM14 50c4-4 10-4 14 0M30 66h10M36 30l6 4-6 4'/%3E%3C/g%3E%3C/svg%3E")}
+.qq summary{list-style:none;cursor:pointer;display:flex;justify-content:flex-end}
+.qq summary::-webkit-details-marker{display:none}
+.qq summary span{max-width:84%;background:var(--wa-out);color:var(--wa-txt);padding:10px 14px;border-radius:12px;border-top-right-radius:0;font-size:15px;display:flex;gap:10px;align-items:center;transition:background .3s}
+.qq summary span:hover{background:#00705C}
+.qq summary i{font-style:normal;color:#7FD1BE;font-size:12px;transition:transform .3s}
+.qq[open] summary i{transform:rotate(180deg)}
+.qq p{margin-top:8px;max-width:84%;background:var(--wa-in);color:var(--wa-txt);padding:10px 14px;border-radius:12px;border-top-left-radius:0;font-size:15px;animation:entra .45s var(--spring)}
+@keyframes entra{from{opacity:0;transform:translateY(8px)}}
+@media(max-width:1023px){.duv .wrap{grid-template-columns:1fr}}
+
+/* contato */
+.fim .caixa{position:relative;border-radius:40px;background:var(--bg2);border:1px solid var(--linha);display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,5vw,70px);align-items:center;padding:clamp(26px,calc(var(--sh)*.06),64px) clamp(22px,5vw,64px);overflow:hidden}
+.fim h2{font-size:clamp(30px,min(4vw,calc(var(--sh)*.066)),56px);position:relative}
+.fim .txt>p{margin:16px 0 28px;color:var(--sec);max-width:440px;position:relative}
+.fim .cta{position:relative}
+.dados{position:relative;display:grid;gap:0;background:var(--bg);border:1px solid var(--linha);border-radius:24px;padding:8px 24px}
+.dados div{padding:calc(var(--sh)*.013) 0;border-bottom:1px solid var(--linha);color:var(--creme);font-size:15px;font-weight:500}
+.dados div:last-child{border:0}
+.dados small{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--sec);font-weight:600;margin-bottom:2px}
+.dados a{transition:color .2s}.dados a:hover{color:var(--am)}
+.dados div{overflow-wrap:anywhere}
+@media(max-width:360px){.fim .caixa{padding:26px 14px}.dados{padding:6px 14px}.dados div{font-size:14px}}
+@media(max-width:1023px){.fim .caixa{grid-template-columns:1fr}}
+
+footer{width:100%;border-top:1px solid var(--linha);padding:30px 0 40px;color:var(--sec);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+footer a{transition:color .2s;min-height:44px;display:inline-flex;align-items:center}footer a:hover{color:var(--am)}
+
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important}
+  .intro{display:none}
+  .ln>span,.sob,.rv,.fone,.pd,.chip,.b{opacity:1!important;transform:none!important}
+  .marcador:before{transform:none!important}
+}
+
+/* botão verde fixo do WhatsApp + botões do contato iguais (23/10) */
+.btn-wa{background:#25D366;color:#06210F;box-shadow:0 12px 30px -12px rgba(37,211,102,.6)}
+.btn-wa:hover{background:#3BE07A}
+.fim .cta{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:470px}
+.fim .cta .btn{width:100%;padding:0 16px}
+@media(max-width:520px){.fim .cta{grid-template-columns:1fr;max-width:none}}
+.zap{position:fixed;right:20px;bottom:20px;z-index:60;display:flex;align-items:center;gap:14px;padding:12px 24px 12px 14px;border-radius:999px;background:#25D366;color:#06210F;box-shadow:0 18px 40px -12px rgba(0,0,0,.6),0 0 0 6px rgba(37,211,102,.18);transition:transform .3s var(--ease),background .3s,opacity .5s;opacity:0;transform:translateY(20px);pointer-events:none}
+body.pronto .zap{opacity:1;transform:none;pointer-events:auto}
+.zap:hover{background:#3BE07A;transform:translateY(-3px)}
+.zap .ic{position:relative;width:48px;height:48px;border-radius:50%;background:#06210F;color:#25D366;display:grid;place-items:center;flex:none}
+.zap .ic svg{width:28px;height:28px}
+.zap b{display:block;font-size:19px;font-weight:800;line-height:1.1}
+.zap small{display:block;font-size:14px;font-weight:600;opacity:.85;margin-top:2px}
+.zap .ic:after{content:"";position:absolute;width:48px;height:48px;border-radius:50%;border:3px solid #25D366;animation:zappulso 2.2s infinite}
+@keyframes zappulso{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.7);opacity:0}}
+@media(prefers-reduced-motion:reduce){.zap .ic:after{animation:none;display:none}}
+body{padding-bottom:96px}
+@media(max-width:600px){.zap{left:12px;right:12px;bottom:12px;justify-content:center;padding:10px 18px 10px 10px}.zap b{font-size:18px}.zap small{font-size:13px}}
+</style>
+</head>
+<body>
+
+<div class="intro" aria-hidden="true"><img src="img/achei-simbolo.webp" alt=""><span>ACHEI</span></div>
+
+<header id="topo">
+  <div class="nav">
+    <a class="marca" href="#inicio" aria-label="Achei, início"><img src="img/achei-simbolo.webp" alt="" width="41" height="30"><b>ACHEI</b></a>
+    <nav class="links">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#comercios">Para comércios</a>
+      <a href="#duvidas">Dúvidas</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="btn btn-am" href="#comercios">Anunciar</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERÓI -->
+  <section class="hero" id="inicio">
+    <div class="luz"></div>
+    <div class="wrap">
+      <div>
+        <h1>
+          <span class="ln"><span>A cidade</span></span>
+          <span class="ln"><span>inteira no seu</span></span>
+          <span class="ln"><span><span class="marcador">WhatsApp.</span></span></span>
+        </h1>
+        <p class="lead sob s1">Pergunte o que você quer. A inteligência artificial do Achei responde na hora onde tem em Xinguara, quanto custa e se está aberto.</p>
+        <div class="cta sob s2">
+          <a class="btn btn-am" href="#como-funciona">Ver como funciona
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-lin" href="#comercios">Tenho um comércio</a>
+        </div>
+        <div class="prova sob s3">
+          <div class="ics"><img src="img/f-burger.webp" alt=""><img src="img/f-acai.webp" alt=""><img src="img/f-farmacia.webp" alt=""><img src="img/f-pet.webp" alt=""></div>
+          <span><b>Comida, farmácia, pet, beleza</b><br>e todo tipo de comércio da cidade</span>
+        </div>
+      </div>
+
+      <div class="palco" aria-label="Exemplo de conversa com o Achei no WhatsApp">
+        <div class="fone">
+          <div class="casco"><div class="tela">
+            <div class="ilha"></div>
+            <div class="st"><svg width="34" height="14" viewBox="0 0 34 14" aria-hidden="true"><text x="0" y="12" fill="#fff" font-family="Inter,system-ui" font-weight="600" font-size="12.5">19:42</text></svg><i><svg width="16" height="11" viewBox="0 0 16 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.3" y="5" width="3" height="6" rx="1"/><rect x="8.6" y="2.5" width="3" height="8.5" rx="1"/><rect x="12.9" y="0" width="3" height="11" rx="1"/></svg><svg width="22" height="11" viewBox="0 0 22 11"><rect x=".5" y=".5" width="18" height="10" rx="3" fill="none" stroke="#fff" opacity=".5"/><rect x="2" y="2" width="13" height="7" rx="1.6" fill="#fff"/><rect x="19.5" y="3.5" width="1.6" height="4" rx=".8" fill="#fff" opacity=".5"/></svg></i></div>
+            <div class="wbar">
+              
+              <div class="av"><img src="img/achei-simbolo.webp" alt=""></div>
+              <div><b>Achei</b><small>online</small></div>
+              <div class="vf"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#AEBAC1" stroke-width="2"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#AEBAC1" stroke-width="2"><path d="M5 4h4l2 5-3 2a11 11 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2"/></svg></div>
+            </div>
+            <div class="wa" id="chatHero">
+              <div class="b out">Boa noite! Quero um hambúrguer, onde tem aberto agora? <span class="h">19:41 <svg width="15" height="10" viewBox="0 0 16 11"><path d="M11 .5L5 7.5 2.5 5 1.4 6.1 5 9.7l7.1-8.3zM15 .5L9 7.5l-.8-.8-1.1 1.2L9 9.7l7.1-8.3z"/></svg></span></div>
+              <div class="dig"><span></span><span></span><span></span></div>
+              <div class="b in foto"><img src="img/f-burger.webp" alt="Hambúrguer artesanal"><p>🍔 <b>Hamburgueria do Centro</b><br>X-bacon artesanal <span class="pr">R$ 29,90</span><br>Aberto até 23h · faz entrega <span class="h">19:41</span></p></div>
+              <div class="b in">Tem mais 2 abertos perto de você. Quer que eu mande o cardápio completo? <span class="h">19:41</span></div>
+            </div>
+            <div class="wcomp"><div><svg width="70" height="16" viewBox="0 0 70 16" aria-hidden="true"><text x="0" y="12" fill="#8696A0" font-family="Inter,system-ui" font-size="13">Mensagem</text></svg></div><span><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 15a3 3 0 003-3V6a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.9V21h2v-2.1A7 7 0 0019 12z"/></svg></span></div>
+          </div></div>
+          <div class="pd pd1"><div class="fl"><img src="img/c-burger.webp" alt="" width="429" height="379"></div></div>
+          <div class="pd pd2"><div class="fl"><img src="img/c-acai.webp" alt="" width="406" height="390"></div></div>
+          <div class="pd pd3"><div class="fl"><img src="img/c-pizza.webp" alt="" width="468" height="441"></div></div>
+          <div class="chip ch1"><span class="q"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#17140A" stroke-width="2.4" stroke-linecap="round"><path d="M12 3a3 3 0 013 3v6a3 3 0 01-6 0V6a3 3 0 013-3zM5 11a7 7 0 0014 0M12 18v3"/></svg></span><span><small>Pode mandar</small><b>texto ou áudio</b></span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="faixa-w" aria-hidden="true"><div class="faixa">
+    <div class="trilho">
+      <span>Hamburguerias</span><span>Farmácias</span><span>Açaí</span><span>Pet shops</span><span>Pizzarias</span><span>Salões</span><span>Assistência de celular</span><span>Mercados</span>
+      <span>Hamburguerias</span><span>Farmácias</span><span>Açaí</span><span>Pet shops</span><span>Pizzarias</span><span>Salões</span><span>Assistência de celular</span><span>Mercados</span>
+    </div>
+  </div></div>
+
+  <!-- CATEGORIAS -->
+  <section class="scr cats" id="categorias">
+    <div class="wrap">
+      <div class="topo">
+          <div class="tit rv"><span class="sobre">O que tem no Achei</span><h2>Do lanche ao remédio,<br>é só perguntar.</h2></div>
+        <p class="rv" style="max-width:360px;color:var(--sec)">Cada comércio da cidade aparece com foto, preço, horário e o botão pra chamar no WhatsApp.</p>
+      </div>
+      <div class="trilha" data-carrossel data-sangra>
+          <div class="cat rv" style="--c:#2A2216"><div class="tx"><small>Lanches</small><b>Hambúrguer</b><span>Aberto até 23h</span></div><div class="ob"><div class="fl"><img src="img/c-burger.webp" alt="Hambúrguer" width="429" height="379"></div></div></div>
+          <div class="cat rv" style="--c:#24172A"><div class="tx"><small>Doces</small><b>Açaí</b><span>Com entrega</span></div><div class="ob"><div class="fl"><img src="img/c-acai.webp" alt="Açaí" width="406" height="390"></div></div></div>
+          <div class="cat rv" style="--c:#2B1A14"><div class="tx"><small>Pizzarias</small><b>Pizza</b><span>Rodízio e delivery</span></div><div class="ob"><div class="fl"><img src="img/c-pizza.webp" alt="Pizza" width="468" height="441"></div></div></div>
+          <div class="cat rv" style="--c:#14251C"><div class="tx"><small>Saúde</small><b>Farmácia</b><span>De plantão hoje</span></div><div class="ob"><div class="fl"><img src="img/c-farmacia.webp" alt="Farmácia" width="445" height="424"></div></div></div>
+          <div class="cat rv" style="--c:#2C1515"><div class="tx"><small>Pet</small><b>Pet shop</b><span>Banho e tosa</span></div><div class="ob"><div class="fl"><img src="img/c-pet.webp" alt="Pet shop" width="416" height="448"></div></div></div>
+          <div class="cat rv" style="--c:#1A1D24"><div class="tx"><small>Serviços</small><b>Celular</b><span>Conserto na hora</span></div><div class="ob"><div class="fl"><img src="img/c-celular.webp" alt="Celular" width="360" height="374"></div>        </div>
+</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="scr como" id="como-funciona">
+    <div class="wrap">
+      <div>
+        <div class="tit rv"><span class="sobre">Como funciona</span><h2>Simples como mandar um oi.</h2><p>Sem baixar aplicativo e sem cadastro. É só salvar o número do Achei.</p></div>
+        <div class="passos rv" id="passos">
+          <button class="passo at" data-i="0"><span class="n">1</span><span><h3>Você pergunta</h3><p>Do seu jeito, por texto ou áudio.</p></span><span class="bar"><i></i></span></button>
+          <button class="passo" data-i="1"><span class="n">2</span><span><h3>O Achei procura</h3><p>Ele separa os comércios da cidade que têm o que você quer.</p></span><span class="bar"><i></i></span></button>
+          <button class="passo" data-i="2"><span class="n">3</span><span><h3>Você resolve</h3><p>Preço, localização e o contato da loja na mesma conversa.</p></span><span class="bar"><i></i></span></button>
+        </div>
+      </div>
+      <div class="vitrine rv">
+        <div class="bg" id="vbg"></div>
+        <div class="fone"><div class="casco"><div class="tela">
+          <div class="ilha"></div>
+          <div class="st"><svg width="34" height="14" viewBox="0 0 34 14" aria-hidden="true"><text x="0" y="12" fill="#fff" font-family="Inter,system-ui" font-weight="600" font-size="12.5">10:15</text></svg><i></i></div>
+          <div class="wbar"><div class="av"><img src="img/achei-simbolo.webp" alt=""></div><div><b>Achei</b><small>online</small></div></div>
+          <div class="wa" style="position:relative">
+            <div class="cena at" data-c="0"><div class="wa" style="position:absolute;inset:0">
+              <div class="dia">HOJE</div>
+              <div class="b out v">🎙️ ▶ ━━━━━━━━ 0:04 <span class="h">10:14</span></div>
+              <div class="b out v">"Tem farmácia aberta agora perto de mim?" <span class="h">10:14</span></div>
+            </div></div>
+            <div class="cena" data-c="1"><div class="wa" style="position:absolute;inset:0">
+              <div class="b out v">Tem farmácia aberta agora perto de mim? <span class="h">10:14</span></div>
+              <div class="b in v foto"><img src="img/f-farmacia.webp" alt="Farmácia"><p>💊 <b>Farmácia do Bairro</b><br>Aberta até 22h · 600 m de você <span class="h">10:14</span></p></div>
+            </div></div>
+            <div class="cena" data-c="2"><div class="wa" style="position:absolute;inset:0">
+              <div class="b in v">📍 Rua Sete de Setembro, Centro<br>💬 Chamar a farmácia no WhatsApp <span class="h">10:15</span></div>
+              <div class="b out v">Perfeito, já chamei. Valeu! <span class="h">10:15</span></div>
+              <div class="b in v">Precisando, é só perguntar 😉 <span class="h">10:15</span></div>
+            </div></div>
+          </div>
+          <div class="wcomp"><div><svg width="70" height="16" viewBox="0 0 70 16" aria-hidden="true"><text x="0" y="12" fill="#8696A0" font-family="Inter,system-ui" font-size="13">Mensagem</text></svg></div><span><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 15a3 3 0 003-3V6a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.9V21h2v-2.1A7 7 0 0019 12z"/></svg></span></div>
+        </div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA COMÉRCIOS -->
+  <section class="scr com" id="comercios">
+    <div class="wrap">
+      <div class="painel rv">
+        <div class="fx"></div>
+        <div class="pessoa"><img src="img/lojista.webp" alt="Dona de comércio recebendo pedidos pelo celular" width="900" height="1331"></div>
+        <div class="txt">
+          <span class="sobre">Para comércios</span>
+          <h2>Sua loja na frente de quem já quer comprar.</h2>
+          <p>Quando alguém pergunta pelo que você vende, o Achei indica o seu negócio com foto, preço e o seu WhatsApp.</p>
+          <div class="planos">
+            <div class="plano"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M5 10v10h14V10M3 10l2-6h14l2 6"/></svg></span><span><b>Grátis</b><span>Nome, endereço, horário e contato nas buscas.</span></span></div>
+            <div class="plano top"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#17140A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><span><b>Parceiro</b><span>Cardápio, preços, selo e relatório do mês.</span></span></div>
+            <div class="plano"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span><b>Destaque</b><span>Primeiro da sua categoria e promoção do dia.</span></span></div>
+          </div>
+          <a class="btn btn-esc" href="#contato">Quero meu comércio no Achei</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DÚVIDAS -->
+  <section class="scr duv" id="duvidas">
+    <div class="wrap">
+      <div class="tit rv"><span class="sobre">Dúvidas</span><h2>Pergunta que a gente responde.</h2><p>Toca numa pergunta e o Achei responde, do mesmo jeito que no WhatsApp.</p></div>
+      <div class="conv rv">
+        <details class="qq" open><summary><span>Precisa pagar pra usar? <i>▾</i></span></summary><p>Não. Pra quem pergunta é grátis, é só mandar mensagem no <a href="https://wa.me/5594992104041" target="_blank" rel="noopener" style="color:#53BDEB;text-decoration:underline">WhatsApp do Achei</a>.</p></details>
+        <details class="qq"><summary><span>Ele entende áudio? <i>▾</i></span></summary><p>Entende. Pode falar do seu jeito, ele transforma em texto e procura pra você.</p></details>
+        <details class="qq"><summary><span>Os preços estão sempre certos? <i>▾</i></span></summary><p>Os parceiros atualizam o próprio cardápio. Nos outros comércios, o Achei mostra a informação pública mais recente.</p></details>
+        <details class="qq"><summary><span>Como coloco minha loja? <i>▾</i></span></summary><p>Fala com a gente pelo telefone ou e-mail aqui embaixo. A gente cadastra e você escolhe o plano.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="scr fim" id="contato">
+    <div class="wrap">
+      <div class="caixa rv">
+        <div class="txt">
+          <span class="sobre">Contato</span>
+          <h2>Bora colocar sua loja <span class="am">no Achei?</span></h2>
+          <p>Chama a gente e o seu comércio começa a aparecer pra quem procura em Xinguara.</p>
+          <div class="cta"><a class="btn btn-wa" href="https://wa.me/5594992104041" target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.2-.4.7-1.4a.5.5 0 000-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.1-1.2c0-.1-.2-.2-.5-.3z"/></svg>Chamar no WhatsApp</a><a class="btn btn-lin" href="mailto:raquel_rocha15@hotmail.com">Mandar e-mail</a></div>
+        </div>
+        <div class="dados">
+          <div><small>Empresa</small>RAQUEL ALVES DA ROCHA 01571341218 (Achei na TV)</div>
+          <div><small>CNPJ</small>41.662.277/0001-67</div>
+          <div><small>Endereço</small>R. Valdeis Divino Dutra, 20, Setor Marajoara II, Xinguara (PA), CEP 68557-501</div>
+          <div><small>WhatsApp</small><a href="https://wa.me/5594992104041" target="_blank" rel="noopener">(94) 99210-4041</a></div>
+          <div><small>E-mail</small><a href="mailto:raquel_rocha15@hotmail.com">raquel_rocha15@hotmail.com</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="marca" href="#inicio"><img src="img/achei-simbolo.webp" alt="" width="33" height="24" style="height:24px"><b style="font-size:17px">ACHEI</b></a>
+    <span>© 2026 Achei na TV · CNPJ 41.662.277/0001-67 · Imagens ilustrativas</span>
+    <a href="privacidade.html">Política de privacidade</a>
+  </div>
+</footer>
+
+<a class="zap" href="https://wa.me/5594992104041?text=Oi%2C%20Achei!" target="_blank" rel="noopener" aria-label="Chame no WhatsApp e converse com a IA do Achei"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.2-.4.7-1.4a.5.5 0 000-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.1-1.2c0-.1-.2-.2-.5-.3z"/></svg></span><span><b>Chame no WhatsApp</b><small>e converse com a IA do Achei</small></span></a>
+
+<script>
+(function(){
+  var d=document, reduz=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function pronto(){ d.body.classList.add('pronto'); setTimeout(function(){ var i=d.querySelector('.intro'); if(i) i.style.display='none'; },1300); }
+  setTimeout(pronto, reduz?0:1500);
+  setTimeout(pronto, 3500);
+
+  // celular do tamanho do espaço
+  function escala(){
+    d.querySelectorAll('.palco,.vitrine').forEach(function(p){
+      var f=p.querySelector('.fone'); if(!f) return;
+      var r=p.getBoundingClientRect(); var lado=p.classList.contains('palco')?(innerWidth<1024?120:190):0; var k=Math.min(1.12,(r.height*.86)/633,(r.width-32)/(300+2*lado));
+      f.style.setProperty('--k',Math.max(.5,k).toFixed(3));
+    });
+  }
+  escala(); addEventListener('resize',escala);
+  // cabeçalho
+  try{ var h=d.getElementById('topo'); var f=function(){ h.classList.toggle('sol', scrollY>30); }; addEventListener('scroll',f,{passive:true}); f(); }catch(e){}
+
+  // aparecer ao rolar
+  try{
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{threshold:.12});
+    d.querySelectorAll('.rv').forEach(function(el,i){ io.observe(el); });
+    d.querySelectorAll('.trilha .cat').forEach(function(el,i){ el.style.transitionDelay=(i%3*.1)+'s'; });
+  }catch(e){}
+  setTimeout(function(){ d.querySelectorAll('.rv').forEach(function(el){ el.classList.add('in'); }); },6000);
+
+  // conversa do herói
+  try{
+    var itens=[].slice.call(d.querySelectorAll('#chatHero .b, #chatHero .dig'));
+    if(reduz){ itens.forEach(function(x){ if(!x.classList.contains('dig')) x.classList.add('v'); }); }
+    else{
+      var t=[0,900,1400,1500];
+      var ciclo=function(){
+        itens.forEach(function(x){ x.classList.remove('v'); });
+        var i=0;
+        (function prox(){
+          if(i>0 && itens[i-1].classList.contains('dig')) itens[i-1].classList.remove('v');
+          if(i<itens.length){ itens[i].classList.add('v'); i++; setTimeout(prox, t[i]||1300); }
+          else setTimeout(ciclo, 6000);
+        })();
+      };
+      setTimeout(ciclo, 1900);
+    }
+  }catch(e){}
+
+  // passos do como funciona
+  try{
+    var ps=[].slice.call(d.querySelectorAll('.passo')), cs=[].slice.call(d.querySelectorAll('.cena')), bg=d.getElementById('vbg');
+    var fotos=['img/f-pizza.webp','img/f-farmacia.webp','img/f-acai.webp'], atual=0, tm;
+    function vai(n){
+      atual=n;
+      ps.forEach(function(p,i){ p.classList.toggle('at',i===n); var b=p.querySelector('.bar i'); if(b){ b.style.animation='none'; b.offsetWidth; b.style.animation=''; } });
+      cs.forEach(function(c,i){ c.classList.toggle('at',i===n); });
+      bg.style.backgroundImage='url('+fotos[n]+')';
+      clearTimeout(tm); if(!reduz) tm=setTimeout(function(){ vai((atual+1)%3); },5000);
+    }
+    ps.forEach(function(p,i){ p.addEventListener('click',function(){ vai(i); }); });
+    var io2=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) vai(0); else clearTimeout(tm); }); },{threshold:.3});
+    io2.observe(d.getElementById('como-funciona'));
+  }catch(e){}
+
+  // carrossel das categorias (celular/tablet)
+  try{
+    d.querySelectorAll('[data-carrossel]').forEach(function(c){
+      var seg=false, ult=0, vis=false, dir=1, raf;
+      var io3=new IntersectionObserver(function(es){ vis=es[0].isIntersecting; },{threshold:.2}); io3.observe(c);
+      function para(){ seg=true; } function solta(){ ult=Date.now(); seg=false; }
+      c.addEventListener('touchstart',para,{passive:true}); c.addEventListener('pointerdown',para);
+      ['touchend','pointerup','pointercancel'].forEach(function(ev){ c.addEventListener(ev,solta); });
+      var antes=performance.now();
+      function passo(ag){
+        var dt=ag-antes; antes=ag;
+        if(!reduz && vis && !seg && Date.now()-ult>1500 && c.scrollWidth>c.clientWidth+4){
+          c.scrollLeft+=0.032*dt*dir;
+          if(c.scrollLeft+c.clientWidth>=c.scrollWidth-2) dir=-1; else if(c.scrollLeft<=0) dir=1;
+        }
+        raf=requestAnimationFrame(passo);
+      }
+      raf=requestAnimationFrame(passo);
+    });
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
