@@ -3,36 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Achei · A IA de Xinguara no WhatsApp</title>
-<meta name="description" content="Achei: a inteligência artificial no WhatsApp que encontra os comércios de Xinguara. Preço, cardápio, horário e contato numa mensagem.">
-<meta name="theme-color" content="#0C0B08">
+<title>achei ai · A IA de Xinguara no WhatsApp</title>
+<meta name="description" content="achei ai: a inteligência artificial no WhatsApp que encontra os comércios de Xinguara. Preço, cardápio, horário e contato numa mensagem.">
+<meta name="theme-color" content="#000000">
 <link rel="icon" type="image/png" sizes="32x32" href="img/achei-fav32.png">
 <link rel="apple-touch-icon" href="img/achei-touch.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/f-burger.webp">
 <style>
 :root{
-  --bg:#0C0B08; --bg2:#15130E; --bg3:#1E1B14; --linha:#2B271D;
-  --am:#FFD400; --am2:#F2A500; --creme:#F4F0E4; --txt:#CFCABB; --sec:#8F8977;
+  --bg:#000; --bg2:#0D0E10; --bg3:#1C1E22; --linha:#32353C;
+  --am:#FCC51F; --am2:#E3A225; --grad:linear-gradient(135deg,#FBE240,#FCC51F 55%,#E3A225); --creme:#fff; --txt:#CFCABB; --sec:#8F8977;
   --ease:cubic-bezier(.2,.7,.2,1); --spring:cubic-bezier(.34,1.56,.64,1);
   --gut:clamp(22px,4vw,48px); --sh:clamp(600px,100svh,1000px);
   --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-bar:#202C33; --wa-txt:#E9EDEF; --wa-sub:#8696A0;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{background:var(--bg);scroll-behavior:smooth}
-body{background:var(--bg);color:var(--txt);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--bg);color:var(--txt);font:16px/1.6 Quicksand,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 img{display:block}
-h1,h2,h3{font-family:Unbounded,Inter,sans-serif;color:var(--creme);font-weight:700;letter-spacing:-.035em;line-height:1.02}
+h1,h2,h3{font-family:Quicksand,sans-serif;color:var(--creme);font-weight:700;letter-spacing:-.02em;line-height:1.02}
 .wrap{width:100%;max-width:1280px;margin:0 auto;padding:0 var(--gut)}
 .am{color:var(--am)}
 
 /* ===== intro ===== */
 .intro{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;place-items:center;clip-path:inset(0 0 0 0);transition:clip-path 1s var(--ease)}
 .intro img{width:150px;height:auto;opacity:0;transform:scale(.6) translateY(20px);animation:simb 1.1s var(--spring) .15s forwards}
-.intro span{position:absolute;bottom:calc(50% - 110px);font-family:Unbounded;font-weight:700;color:var(--creme);letter-spacing:.18em;font-size:20px;opacity:0;animation:pal .7s var(--ease) .7s forwards}
+.intro span{position:absolute;bottom:calc(50% - 110px);font-family:Quicksand;font-weight:700;color:var(--creme);letter-spacing:.04em;font-size:20px;opacity:0;animation:pal .7s var(--ease) .7s forwards}
 @keyframes simb{to{opacity:1;transform:none}}
 @keyframes pal{to{opacity:1;letter-spacing:.32em}}
 .pronto .intro{clip-path:inset(0 0 100% 0)}
@@ -45,7 +45,7 @@ header.sol{padding-top:10px}
 header.sol .nav{max-width:1080px;height:60px;background:rgba(21,19,14,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-color:var(--linha);box-shadow:0 18px 40px -20px rgba(0,0,0,.8)}
 .marca{display:flex;align-items:center;gap:10px;height:100%}
 .marca img{height:30px;width:auto}
-.marca b{font-family:Unbounded;font-weight:700;font-size:21px;color:var(--creme);letter-spacing:.04em;line-height:1}
+.marca b{font-family:Quicksand;font-weight:700;font-size:21px;color:var(--creme);letter-spacing:.04em;line-height:1}
 .links{display:flex;gap:34px;font-size:15px;font-weight:500;color:var(--sec)}
 .links a{position:relative;transition:color .25s}
 .links a:after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--am);transform:scaleX(0);transition:transform .35s var(--ease)}
@@ -54,8 +54,8 @@ header.sol .nav{max-width:1080px;height:60px;background:rgba(21,19,14,.82);backd
 .btn:hover{transform:translateY(-2px)}
 .btn:active{transform:scale(.97)}
 .btn svg{flex:none}
-.btn-am{background:var(--am);color:#17140A;box-shadow:0 12px 30px -12px rgba(255,212,0,.6)}
-.btn-am:hover{background:#FFE14D;box-shadow:0 16px 36px -10px rgba(255,212,0,.8)}
+.btn-am{background:var(--grad);color:#32353C;box-shadow:0 12px 30px -12px rgba(252,197,31,.6)}
+.btn-am:hover{background:#FFE14D;box-shadow:0 16px 36px -10px rgba(252,197,31,.8)}
 .btn-am:after{content:"";position:absolute;top:0;bottom:0;left:-50%;width:35%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);animation:brilho 5s 3s infinite}
 @keyframes brilho{0%,72%{left:-50%}100%{left:130%}}
 .btn-esc{background:var(--bg);color:var(--creme)}
@@ -67,7 +67,7 @@ header.sol .nav{max-width:1080px;height:60px;background:rgba(21,19,14,.82);backd
 
 /* ===== herói ===== */
 .hero{position:relative;height:100svh;min-height:560px;display:flex;align-items:center;overflow:hidden;padding:96px 0 100px}
-.hero .luz{position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(255,212,0,.10) 62%,transparent 80%),linear-gradient(180deg,transparent 60%,rgba(242,165,0,.06));pointer-events:none}
+.hero .luz{position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(252,197,31,.10) 62%,transparent 80%),linear-gradient(180deg,transparent 60%,rgba(242,165,0,.06));pointer-events:none}
 .hero .wrap{position:relative;height:100%;display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center}
 .hero h1{font-size:clamp(40px,min(5.2vw,9.4svh),84px)}
 .ln{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
@@ -75,7 +75,7 @@ header.sol .nav{max-width:1080px;height:60px;background:rgba(21,19,14,.82);backd
 .pronto .ln>span{transform:none}
 .pronto .ln:nth-child(2)>span{transition-delay:.12s}
 .pronto .ln:nth-child(3)>span{transition-delay:.24s}
-.marcador{position:relative;display:inline-block;color:#17140A;padding:0 .14em;margin-left:-.06em}
+.marcador{position:relative;display:inline-block;color:#32353C;padding:0 .14em;margin-left:-.06em}
 .marcador:before{content:"";position:absolute;inset:.1em 0 .02em;background:var(--am);border-radius:.14em;transform:scaleX(0);transform-origin:left;transition:transform .8s var(--ease) .9s;z-index:-1}
 .pronto .marcador:before{transform:scaleX(1)}
 .marcador{z-index:0}
@@ -94,7 +94,7 @@ header.sol .nav{max-width:1080px;height:60px;background:rgba(21,19,14,.82);backd
 .palco{position:relative;height:100%;max-height:760px}
 .fone{position:absolute;left:50%;top:50%;width:300px;height:633px;margin:-316px 0 0 -150px;transform:scale(var(--k,1)) translateY(60px);opacity:0;transition:opacity 1s var(--ease) .3s,transform 1.3s var(--spring) .3s;z-index:3}
 .pronto .fone{opacity:1;transform:scale(var(--k,1))}
-.casco{position:absolute;inset:0;border-radius:48px;background:linear-gradient(145deg,#3A3730,#16140F 40%,#26231C);padding:10px;box-shadow:inset 0 0 0 1.5px #4A463B,0 50px 90px -30px rgba(0,0,0,.95),0 30px 60px -40px rgba(255,212,0,.25)}
+.casco{position:absolute;inset:0;border-radius:48px;background:linear-gradient(145deg,#3A3730,#16140F 40%,#26231C);padding:10px;box-shadow:inset 0 0 0 1.5px #4A463B,0 50px 90px -30px rgba(0,0,0,.95),0 30px 60px -40px rgba(252,197,31,.25)}
 .casco:before{content:"";position:absolute;right:-3px;top:22%;width:3px;height:64px;border-radius:2px;background:#2C2922}
 .tela{position:relative;height:100%;border-radius:39px;overflow:hidden;background:var(--wa-bg);display:flex;flex-direction:column}
 .ilha{position:absolute;top:9px;left:50%;width:86px;height:24px;border-radius:14px;background:#000;transform:translateX(-50%);z-index:5}
@@ -169,16 +169,16 @@ header.sol .nav{max-width:1080px;height:60px;background:rgba(21,19,14,.82);backd
 
 /* ===== faixa ===== */
 .faixa-w{overflow:hidden;padding:26px 0}
-.faixa{position:relative;z-index:2;background:var(--am);color:#17140A;padding:18px 0;overflow:hidden;transform:rotate(-1.6deg);margin:0 -40px;box-shadow:0 24px 50px -24px rgba(255,212,0,.45)}
-.trilho{display:flex;width:max-content;animation:anda 36s linear infinite;font-family:Unbounded;font-weight:700;font-size:clamp(18px,2vw,28px);letter-spacing:-.02em}
+.faixa{position:relative;z-index:2;background:var(--grad);color:#32353C;padding:18px 0;overflow:hidden;transform:rotate(-1.6deg);margin:0 -40px;box-shadow:0 24px 50px -24px rgba(252,197,31,.45)}
+.trilho{display:flex;width:max-content;animation:anda 36s linear infinite;font-family:Quicksand;font-weight:700;font-size:clamp(18px,2vw,28px);letter-spacing:-.02em}
 .trilho span{display:flex;align-items:center;gap:36px;padding-right:36px;white-space:nowrap}
-.trilho span:after{content:"";width:13px;height:13px;background:#17140A;border-radius:3px;transform:rotate(45deg)}
+.trilho span:after{content:"";width:13px;height:13px;background:#32353C;border-radius:3px;transform:rotate(45deg)}
 @keyframes anda{to{transform:translateX(-50%)}}
 
 /* ===== seções ===== */
 .scr{position:relative;padding:84px 0 64px}
 @media(min-width:1024px){.scr{height:var(--sh);padding:calc(var(--sh)*.1) 0 calc(var(--sh)*.06);display:flex;flex-direction:column;justify-content:center}}
-.sobre{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--am);margin-bottom:18px;display:block}
+.sobre{font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--am);margin-bottom:18px;display:block}
 .tit h2{font-size:clamp(30px,min(4vw,calc(var(--sh)*.066)),58px)}
 .tit p{margin-top:16px;font-size:clamp(16px,1.25vw,18px);color:var(--sec);max-width:500px}
 .rv{opacity:0;transform:translateY(40px);transition:opacity .9s var(--ease),transform 1s var(--ease)}
@@ -192,7 +192,7 @@ header.sol .nav{max-width:1080px;height:60px;background:rgba(21,19,14,.82);backd
 .cat:hover:before{transform:scale(1.02)}
 .cat .tx{position:absolute;left:22px;top:50%;transform:translateY(-50%);width:calc(54% - 44px);z-index:2}
 .cat .tx small{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,240,228,.55);margin-bottom:6px}
-.cat .tx b{display:block;font-family:Unbounded;font-weight:700;color:var(--creme);font-size:clamp(15px,1.25vw,19px);letter-spacing:-.02em;line-height:1.1}
+.cat .tx b{display:block;font-family:Quicksand;font-weight:700;color:var(--creme);font-size:clamp(15px,1.25vw,19px);letter-spacing:-.02em;line-height:1.1}
 .cat .tx span{display:block;color:rgba(244,240,228,.6);font-size:14px;margin-top:6px}
 .cat .ob{position:absolute;right:14px;bottom:9%;width:43%;z-index:1}
 .cat .ob .fl{animation:flut 7s ease-in-out infinite}
@@ -210,13 +210,13 @@ header.sol .nav{max-width:1080px;height:60px;background:rgba(21,19,14,.82);backd
 .como .wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,6vw,90px);align-items:center}
 .passos{margin-top:36px;display:grid;gap:10px}
 .passo{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:20px 22px;border-radius:22px;border:1px solid var(--linha);background:transparent;cursor:pointer;text-align:left;color:inherit;font:inherit;transition:background .4s,border-color .4s}
-.passo .n{font-family:Unbounded;font-weight:700;font-size:15px;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--bg3);color:var(--sec);transition:background .4s,color .4s}
+.passo .n{font-family:Quicksand;font-weight:700;font-size:15px;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--bg3);color:var(--sec);transition:background .4s,color .4s}
 .passo h3{font-size:19px;letter-spacing:-.02em}
 .passo p{color:var(--sec);font-size:15px;margin-top:4px}
 .passo .bar{grid-column:1/-1;height:3px;border-radius:2px;background:var(--linha);overflow:hidden;display:none}
 .passo .bar i{display:block;height:100%;width:0;background:var(--am)}
 .passo.at{background:var(--bg2);border-color:#3B3628}
-.passo.at .n{background:var(--am);color:#17140A}
+.passo.at .n{background:var(--am);color:#32353C}
 .passo.at .bar{display:block}
 .passo.at .bar i{animation:enche 5s linear forwards}
 @keyframes enche{to{width:100%}}
@@ -228,23 +228,23 @@ header.sol .nav{max-width:1080px;height:60px;background:rgba(21,19,14,.82);backd
 @media(max-width:1023px){.como .wrap{grid-template-columns:1fr}.vitrine{height:560px}}
 
 /* para comércios */
-.com .painel{position:relative;border-radius:40px;background:var(--am);color:#17140A;display:grid;grid-template-columns:1fr 1.1fr;align-items:center;min-height:calc(var(--sh)*.66);margin-top:calc(var(--sh)*.08)}
+.com .painel{position:relative;border-radius:40px;background:var(--grad);color:#32353C;display:grid;grid-template-columns:1fr 1.1fr;align-items:center;min-height:calc(var(--sh)*.66);margin-top:calc(var(--sh)*.08)}
 .com .painel .fx{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none}
 .com .painel .fx:before{content:"";position:absolute;right:-6%;top:-20%;width:58%;height:140%;background:url(img/achei-simbolo.webp) center/contain no-repeat;opacity:.09;filter:brightness(0)}
 .pessoa{position:relative;align-self:end;height:100%;min-height:inherit}
 .pessoa{container-type:size}
 .pessoa img{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:min(116cqh,calc(96cqw * 1329 / 900));width:auto;max-width:none}
 .com .txt{position:relative;padding:calc(var(--sh)*.05) clamp(28px,4vw,60px) calc(var(--sh)*.05) 0}
-.com h2{color:#17140A;font-size:clamp(28px,min(3.4vw,calc(var(--sh)*.058)),50px)}
+.com h2{color:#32353C;font-size:clamp(28px,min(3.4vw,calc(var(--sh)*.058)),50px)}
 .com .sobre{color:#5C4700}
 .com .txt>p{margin:14px 0 24px;color:#4A3B05;font-size:clamp(15px,1.2vw,17px);max-width:470px}
 .planos{display:grid;gap:10px;margin-bottom:26px}
 .plano{display:flex;align-items:center;gap:14px;background:rgba(23,20,10,.07);border-radius:18px;padding:15px 18px;transition:background .3s,transform .35s var(--ease)}
 .plano:hover{background:rgba(23,20,10,.12);transform:translateX(5px)}
-.plano .ic{flex:none;width:38px;height:38px;border-radius:11px;background:#17140A;display:grid;place-items:center}
-.plano b{font-family:Unbounded;font-weight:700;font-size:16px;letter-spacing:-.02em;display:block}
+.plano .ic{flex:none;width:38px;height:38px;border-radius:11px;background:#32353C;display:grid;place-items:center}
+.plano b{font-family:Quicksand;font-weight:700;font-size:16px;letter-spacing:-.02em;display:block}
 .plano span{font-size:14px;color:#4A3B05;line-height:1.35;display:block}
-.plano.top{background:#17140A;color:var(--creme)}
+.plano.top{background:#32353C;color:var(--creme)}
 .plano.top span{color:#B9B29E}
 .plano.top .ic{background:var(--am)}
 @media(max-width:1023px){
@@ -320,11 +320,11 @@ footer{padding-bottom:120px !important}
 </head>
 <body>
 
-<div class="intro" aria-hidden="true"><img src="img/achei-simbolo.webp" alt=""><span>ACHEI</span></div>
+<div class="intro" aria-hidden="true"><img src="img/achei-simbolo.webp" alt=""><span>achei ai</span></div>
 
 <header id="topo">
   <div class="nav">
-    <a class="marca" href="#inicio" aria-label="Achei, início"><img src="img/achei-simbolo.webp" alt="" width="41" height="30"><b>ACHEI</b></a>
+    <a class="marca" href="#inicio" aria-label="Achei, início"><img src="img/achei-simbolo.webp" alt="" width="36" height="32"><b>achei ai</b></a>
     <nav class="links">
       <a href="#como-funciona">Como funciona</a>
       <a href="#comercios">Para comércios</a>
@@ -346,7 +346,7 @@ footer{padding-bottom:120px !important}
           <span class="ln"><span>inteira no seu</span></span>
           <span class="ln"><span><span class="marcador">WhatsApp.</span></span></span>
         </h1>
-        <p class="lead sob s1">Pergunte o que você quer. A inteligência artificial do Achei responde na hora onde tem em Xinguara, quanto custa e se está aberto.</p>
+        <p class="lead sob s1">Pergunte o que você quer. A inteligência artificial do achei ai responde na hora onde tem em Xinguara, quanto custa e se está aberto.</p>
         <div class="cta sob s2">
           <a class="btn btn-wa" href="https://wa.me/5594992104041?text=Oi%2C%20Achei!" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.2-.4.7-1.4a.5.5 0 000-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.1-1.2c0-.1-.2-.2-.5-.3z"/></svg>Conversar com a IA</a>
           <a class="btn btn-lin" href="#comercios">Tenho um comércio</a>
@@ -357,15 +357,15 @@ footer{padding-bottom:120px !important}
         </div>
       </div>
 
-      <div class="palco" aria-label="Exemplo de conversa com o Achei no WhatsApp">
+      <div class="palco" aria-label="Exemplo de conversa com o achei ai no WhatsApp">
         <div class="fone">
           <div class="casco"><div class="tela">
             <div class="ilha"></div>
-            <div class="st"><svg width="34" height="14" viewBox="0 0 34 14" aria-hidden="true"><text x="0" y="12" fill="#fff" font-family="Inter,system-ui" font-weight="600" font-size="12.5">19:42</text></svg><i><svg width="16" height="11" viewBox="0 0 16 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.3" y="5" width="3" height="6" rx="1"/><rect x="8.6" y="2.5" width="3" height="8.5" rx="1"/><rect x="12.9" y="0" width="3" height="11" rx="1"/></svg><svg width="22" height="11" viewBox="0 0 22 11"><rect x=".5" y=".5" width="18" height="10" rx="3" fill="none" stroke="#fff" opacity=".5"/><rect x="2" y="2" width="13" height="7" rx="1.6" fill="#fff"/><rect x="19.5" y="3.5" width="1.6" height="4" rx=".8" fill="#fff" opacity=".5"/></svg></i></div>
+            <div class="st"><svg width="34" height="14" viewBox="0 0 34 14" aria-hidden="true"><text x="0" y="12" fill="#fff" font-family="Quicksand,system-ui" font-weight="600" font-size="12.5">19:42</text></svg><i><svg width="16" height="11" viewBox="0 0 16 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.3" y="5" width="3" height="6" rx="1"/><rect x="8.6" y="2.5" width="3" height="8.5" rx="1"/><rect x="12.9" y="0" width="3" height="11" rx="1"/></svg><svg width="22" height="11" viewBox="0 0 22 11"><rect x=".5" y=".5" width="18" height="10" rx="3" fill="none" stroke="#fff" opacity=".5"/><rect x="2" y="2" width="13" height="7" rx="1.6" fill="#fff"/><rect x="19.5" y="3.5" width="1.6" height="4" rx=".8" fill="#fff" opacity=".5"/></svg></i></div>
             <div class="wbar">
               
               <div class="av"><img src="img/achei-simbolo.webp" alt=""></div>
-              <div><b>Achei</b><small>online</small></div>
+              <div><b>achei ai</b><small>online</small></div>
               <div class="vf"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#AEBAC1" stroke-width="2"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#AEBAC1" stroke-width="2"><path d="M5 4h4l2 5-3 2a11 11 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2"/></svg></div>
             </div>
             <div class="wa" id="chatHero">
@@ -374,12 +374,12 @@ footer{padding-bottom:120px !important}
               <div class="b in foto"><img src="img/f-burger.webp" alt="Hambúrguer artesanal"><p>🍔 <b>Hamburgueria do Centro</b><br>X-bacon artesanal <span class="pr">R$ 29,90</span><br>Aberto até 23h · faz entrega <span class="h">19:41</span></p></div>
               <div class="b in">Tem mais 2 abertos perto de você. Quer que eu mande o cardápio completo? <span class="h">19:41</span></div>
             </div>
-            <div class="wcomp"><div><svg width="70" height="16" viewBox="0 0 70 16" aria-hidden="true"><text x="0" y="12" fill="#8696A0" font-family="Inter,system-ui" font-size="13">Mensagem</text></svg></div><span><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 15a3 3 0 003-3V6a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.9V21h2v-2.1A7 7 0 0019 12z"/></svg></span></div>
+            <div class="wcomp"><div><svg width="70" height="16" viewBox="0 0 70 16" aria-hidden="true"><text x="0" y="12" fill="#8696A0" font-family="Quicksand,system-ui" font-size="13">Mensagem</text></svg></div><span><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 15a3 3 0 003-3V6a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.9V21h2v-2.1A7 7 0 0019 12z"/></svg></span></div>
           </div></div>
           <div class="pd pd1"><div class="fl"><img src="img/c-burger.webp" alt="" width="429" height="379"></div></div>
           <div class="pd pd2"><div class="fl"><img src="img/c-acai.webp" alt="" width="406" height="390"></div></div>
           <div class="pd pd3"><div class="fl"><img src="img/c-pizza.webp" alt="" width="468" height="441"></div></div>
-          <div class="chip ch1"><span class="q"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#17140A" stroke-width="2.4" stroke-linecap="round"><path d="M12 3a3 3 0 013 3v6a3 3 0 01-6 0V6a3 3 0 013-3zM5 11a7 7 0 0014 0M12 18v3"/></svg></span><span><small>Pode mandar</small><b>texto ou áudio</b></span></div>
+          <div class="chip ch1"><span class="q"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#32353C" stroke-width="2.4" stroke-linecap="round"><path d="M12 3a3 3 0 013 3v6a3 3 0 01-6 0V6a3 3 0 013-3zM5 11a7 7 0 0014 0M12 18v3"/></svg></span><span><small>Pode mandar</small><b>texto ou áudio</b></span></div>
       </div>
     </div>
   </section>
@@ -395,7 +395,7 @@ footer{padding-bottom:120px !important}
   <section class="scr cats" id="categorias">
     <div class="wrap">
       <div class="topo">
-          <div class="tit rv"><span class="sobre">O que tem no Achei</span><h2>Do lanche ao remédio,<br>é só perguntar.</h2></div>
+          <div class="tit rv"><span class="sobre">O que tem no achei ai</span><h2>Do lanche ao remédio,<br>é só perguntar.</h2></div>
         <p class="rv" style="max-width:360px;color:var(--sec)">Cada comércio da cidade aparece com foto, preço, horário e o botão pra chamar no WhatsApp.</p>
       </div>
       <div class="trilha" data-carrossel data-sangra>
@@ -414,10 +414,10 @@ footer{padding-bottom:120px !important}
   <section class="scr como" id="como-funciona">
     <div class="wrap">
       <div>
-        <div class="tit rv"><span class="sobre">Como funciona</span><h2>Simples como mandar um oi.</h2><p>Sem baixar aplicativo e sem cadastro. É só salvar o número do Achei.</p></div>
+        <div class="tit rv"><span class="sobre">Como funciona</span><h2>Simples como mandar um oi.</h2><p>Sem baixar aplicativo e sem cadastro. É só salvar o número do achei ai.</p></div>
         <div class="passos rv" id="passos">
           <button class="passo at" data-i="0"><span class="n">1</span><span><h3>Você pergunta</h3><p>Do seu jeito, por texto ou áudio.</p></span><span class="bar"><i></i></span></button>
-          <button class="passo" data-i="1"><span class="n">2</span><span><h3>O Achei procura</h3><p>Ele separa os comércios da cidade que têm o que você quer.</p></span><span class="bar"><i></i></span></button>
+          <button class="passo" data-i="1"><span class="n">2</span><span><h3>O achei ai procura</h3><p>Ele separa os comércios da cidade que têm o que você quer.</p></span><span class="bar"><i></i></span></button>
           <button class="passo" data-i="2"><span class="n">3</span><span><h3>Você resolve</h3><p>Preço, localização e o contato da loja na mesma conversa.</p></span><span class="bar"><i></i></span></button>
         </div>
       </div>
@@ -425,8 +425,8 @@ footer{padding-bottom:120px !important}
         <div class="bg" id="vbg"></div>
         <div class="fone"><div class="casco"><div class="tela">
           <div class="ilha"></div>
-          <div class="st"><svg width="34" height="14" viewBox="0 0 34 14" aria-hidden="true"><text x="0" y="12" fill="#fff" font-family="Inter,system-ui" font-weight="600" font-size="12.5">10:15</text></svg><i></i></div>
-          <div class="wbar"><div class="av"><img src="img/achei-simbolo.webp" alt=""></div><div><b>Achei</b><small>online</small></div></div>
+          <div class="st"><svg width="34" height="14" viewBox="0 0 34 14" aria-hidden="true"><text x="0" y="12" fill="#fff" font-family="Quicksand,system-ui" font-weight="600" font-size="12.5">10:15</text></svg><i></i></div>
+          <div class="wbar"><div class="av"><img src="img/achei-simbolo.webp" alt=""></div><div><b>achei ai</b><small>online</small></div></div>
           <div class="wa" style="position:relative">
             <div class="cena at" data-c="0"><div class="wa" style="position:absolute;inset:0">
               <div class="dia">HOJE</div>
@@ -443,7 +443,7 @@ footer{padding-bottom:120px !important}
               <div class="b in v">Precisando, é só perguntar 😉 <span class="h">10:15</span></div>
             </div></div>
           </div>
-          <div class="wcomp"><div><svg width="70" height="16" viewBox="0 0 70 16" aria-hidden="true"><text x="0" y="12" fill="#8696A0" font-family="Inter,system-ui" font-size="13">Mensagem</text></svg></div><span><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 15a3 3 0 003-3V6a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.9V21h2v-2.1A7 7 0 0019 12z"/></svg></span></div>
+          <div class="wcomp"><div><svg width="70" height="16" viewBox="0 0 70 16" aria-hidden="true"><text x="0" y="12" fill="#8696A0" font-family="Quicksand,system-ui" font-size="13">Mensagem</text></svg></div><span><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 15a3 3 0 003-3V6a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.9V21h2v-2.1A7 7 0 0019 12z"/></svg></span></div>
         </div></div></div>
       </div>
     </div>
@@ -458,10 +458,10 @@ footer{padding-bottom:120px !important}
         <div class="txt">
           <span class="sobre">Para comércios</span>
           <h2>Sua loja na frente de quem já quer comprar.</h2>
-          <p>Quando alguém pergunta pelo que você vende, o Achei indica o seu negócio com foto, preço e o seu WhatsApp.</p>
+          <p>Quando alguém pergunta pelo que você vende, o achei ai indica o seu negócio com foto, preço e o seu WhatsApp.</p>
           <div class="planos">
             <div class="plano"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M5 10v10h14V10M3 10l2-6h14l2 6"/></svg></span><span><b>Grátis</b><span>Nome, endereço, horário e contato nas buscas.</span></span></div>
-            <div class="plano top"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#17140A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><span><b>Parceiro</b><span>Cardápio, preços, selo e relatório do mês.</span></span></div>
+            <div class="plano top"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#32353C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><span><b>Parceiro</b><span>Cardápio, preços, selo e relatório do mês.</span></span></div>
             <div class="plano"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span><b>Destaque</b><span>Primeiro da sua categoria e promoção do dia.</span></span></div>
           </div>
           <a class="btn btn-esc" href="https://wa.me/5594992104041?text=Ol%C3%A1!%20Quero%20cadastrar%20meu%20com%C3%A9rcio%20no%20Achei." target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9M3 9h18M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0M5 12v8h14v-8M10 20v-5h4v5"/></svg>Cadastrar meu comércio</a>
@@ -473,11 +473,11 @@ footer{padding-bottom:120px !important}
   <!-- DÚVIDAS -->
   <section class="scr duv" id="duvidas">
     <div class="wrap">
-      <div class="tit rv"><span class="sobre">Dúvidas</span><h2>Pergunta que a gente responde.</h2><p>Toca numa pergunta e o Achei responde, do mesmo jeito que no WhatsApp.</p></div>
+      <div class="tit rv"><span class="sobre">Dúvidas</span><h2>Pergunta que a gente responde.</h2><p>Toca numa pergunta e o achei ai responde, do mesmo jeito que no WhatsApp.</p></div>
       <div class="conv rv">
-        <details class="qq" open><summary><span>Precisa pagar pra usar? <i>▾</i></span></summary><p>Não. Pra quem pergunta é grátis, é só mandar mensagem no <a href="https://wa.me/5594992104041" target="_blank" rel="noopener" style="color:#53BDEB;text-decoration:underline">WhatsApp do Achei</a>.</p></details>
+        <details class="qq" open><summary><span>Precisa pagar pra usar? <i>▾</i></span></summary><p>Não. Pra quem pergunta é grátis, é só mandar mensagem no <a href="https://wa.me/5594992104041" target="_blank" rel="noopener" style="color:#53BDEB;text-decoration:underline">WhatsApp do achei ai</a>.</p></details>
         <details class="qq"><summary><span>Ele entende áudio? <i>▾</i></span></summary><p>Entende. Pode falar do seu jeito, ele transforma em texto e procura pra você.</p></details>
-        <details class="qq"><summary><span>Os preços estão sempre certos? <i>▾</i></span></summary><p>Os parceiros atualizam o próprio cardápio. Nos outros comércios, o Achei mostra a informação pública mais recente.</p></details>
+        <details class="qq"><summary><span>Os preços estão sempre certos? <i>▾</i></span></summary><p>Os parceiros atualizam o próprio cardápio. Nos outros comércios, o achei ai mostra a informação pública mais recente.</p></details>
         <details class="qq"><summary><span>Como coloco minha loja? <i>▾</i></span></summary><p>Fala com a gente pelo telefone ou e-mail aqui embaixo. A gente cadastra e você escolhe o plano.</p></details>
       </div>
     </div>
@@ -489,7 +489,7 @@ footer{padding-bottom:120px !important}
       <div class="caixa rv">
         <div class="txt">
           <span class="sobre">Contato</span>
-          <h2>Bora colocar sua loja <span class="am">no Achei?</span></h2>
+          <h2>Bora colocar sua loja <span class="am">no achei ai?</span></h2>
           <p>Chama a gente e o seu comércio começa a aparecer pra quem procura em Xinguara.</p>
           <div class="cta"><a class="btn btn-am" href="https://wa.me/5594992104041?text=Ol%C3%A1!%20Quero%20cadastrar%20meu%20com%C3%A9rcio%20no%20Achei." target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9M3 9h18M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0M5 12v8h14v-8M10 20v-5h4v5"/></svg>Cadastrar meu comércio</a><a class="btn btn-lin" href="mailto:raquel_rocha15@hotmail.com">Mandar e-mail</a></div>
         </div>
@@ -507,13 +507,13 @@ footer{padding-bottom:120px !important}
 
 <footer>
   <div class="wrap">
-    <a class="marca" href="#inicio"><img src="img/achei-simbolo.webp" alt="" width="33" height="24" style="height:24px"><b style="font-size:17px">ACHEI</b></a>
+    <a class="marca" href="#inicio"><img src="img/achei-simbolo.webp" alt="" width="27" height="24" style="height:24px"><b style="font-size:17px">achei ai</b></a>
     <span>© 2026 Achei na TV · CNPJ 41.662.277/0001-67 · Imagens ilustrativas</span>
     <a href="privacidade.html">Política de privacidade</a>
   </div>
 </footer>
 
-<a class="zap" href="https://wa.me/5594992104041?text=Oi%2C%20Achei!" target="_blank" rel="noopener" aria-label="Chame no WhatsApp e converse com a IA do Achei"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.2-.4.7-1.4a.5.5 0 000-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.1-1.2c0-.1-.2-.2-.5-.3z"/></svg></span><span><b>Chame no WhatsApp</b><small>e converse com a IA do Achei</small></span></a>
+<a class="zap" href="https://wa.me/5594992104041?text=Oi%2C%20Achei!" target="_blank" rel="noopener" aria-label="Chame no WhatsApp e converse com a IA do achei ai"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.2-.4.7-1.4a.5.5 0 000-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.1-1.2c0-.1-.2-.2-.5-.3z"/></svg></span><span><b>Chame no WhatsApp</b><small>e converse com a IA do achei ai</small></span></a>
 
 <script>
 (function(){
